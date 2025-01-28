@@ -28,7 +28,7 @@ public interface GraphInterface<T> {
     Map<T, Integer> closenessCentrality();
     // Retorna um mapa contendo o valor da centralidade de
 // intermediação de cada vértice do grafo
-    Map<T, Integer> betweennessCentrality();*/
+    Map<T, Integer> betweennessCentrality();
     // Retorna uma String como representação do grafo
     String toString();
 }
