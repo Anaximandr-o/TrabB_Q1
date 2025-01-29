@@ -65,17 +65,22 @@ public class Graph<T> implements GraphInterface<T>
 
     public int countVertices()
     {
-        return 0;
+        return map.keySet().size();
     }
 
     public int countEdges()
     {
-        return 0;
+        int count = 0;
+        for(List<T> l : map.values())
+            count += l.size();
+
+        return count;
     }
 
     @Override
     public double calculateSparsity() {
-        return 0;
+        int n = countVertices();
+        return 1 - ((double) countEdges() / (n * n));
     }
 
     @Override

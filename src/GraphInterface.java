@@ -5,7 +5,6 @@ public interface GraphInterface<T> {
     void loadCSV(String filePath);
     // Adiciona vértice no grafo
     void addVertex(T vertex);
-    // Adiciona aresta no grafo
     void addEdge(T source, T destination);
     // Retorna verdadeiro se o vértice já existe no grafo
     boolean hasVertex(T vertex);
