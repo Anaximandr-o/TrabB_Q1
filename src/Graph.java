@@ -84,8 +84,39 @@ public class Graph<T> implements GraphInterface<T>
     }
 
     @Override
-    public ArrayList BFSSearch(Object start, Object end) {
+    public ArrayList<Integer> BFSSearch(Object start, Object end) {
+        int inicio = (Integer) start;
+        int fim = (Integer) end;
+        Queue<Integer> fila = new LinkedList<>();
+        Map<Integer,Integer> predecessor = new HashMap<>(); //Serve para traçar o caminho feito do nó inicio até o fim
+        Set<Integer> visitado = new HashSet<>();
+        fila.add(inicio);
+        visitado.add(inicio);
+
+        while(!fila.isEmpty()){
+            int verticeAtual = fila.poll(); //Remove e retorna o primeiro elemento da fila para utilizar no verticeCorrente
+            if(verticeAtual == fim)
+                return reconstroiCaminho(predecessor, inicio, fim); //Se chegou ao fim, retorna o caminho feito
+
+            List<Integer> vizinho = (List<Integer>)map.get(verticeAtual); //vizinho recebe uma lista dos vertices adjacentes do vertice atual
+            for(int i = 0; i<vizinho.size(); i++){ //O for roda por todos esses vizinhos
+                int v = vizinho.get(i);
+                if(!visitado.contains(v)){ //O if checa se o vizinho corrente já foi visitado, caso não, adiciona ele nas listas correspondentes;
+                    fila.add(v);
+                    visitado.add(v);
+                    predecessor.put(v, verticeAtual);
+                }
+            }
+        }
         return null;
+    }
+
+    private ArrayList<Integer> reconstroiCaminho(Map<Integer, Integer> antecessor, int inicio, int fim){
+        ArrayList<Integer> caminho = new ArrayList<>();
+        for(Integer i = fim; i != null; i = antecessor.get(i)) //Esse for encontra o caminho percorrido.
+            caminho.addFirst(i); //Começando pelo fim, ele é incrementado movendo para o antecessor do vertice corrente
+        //Se o vertice não tiver antecessor, ele retorna null.
+        return caminho;
     }
 
     @Override
