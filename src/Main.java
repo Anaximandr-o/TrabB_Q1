@@ -1,13 +1,22 @@
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Collections;
+
 public class Main {
     public static void main(String[] args) {
+
+
         Graph<String> grafo = new Graph<>(true);
-        grafo.addEdge("1", "2");
-        grafo.addEdge("1", "3");
-        grafo.addEdge("3", "2");
-        grafo.addEdge("2","3");
-        System.out.println(grafo.countVertices());
-        System.out.println(grafo.countEdges());
-        System.out.println(grafo.calculateSparsity());
-       // grafo.loadCSV("JC-202412-citibike-tripdata.csv");
+        grafo.loadCSV("JC-202412-citibike-tripdata.csv");
+        System.out.println("Número de estações: " + grafo.countVertices());
+        System.out.println("Número de trajetos: " + grafo.countEdges());
+        System.out.println("Esparsidade do grafo: " + grafo.calculateSparsity());
+
+        //Questão 3
+
+        Map<String, Integer> grau = grafo.degreeCentrality();
+        String estacaoGrau = Collections.max(grau.entrySet(), Map.Entry.comparingByValue()).getKey();
+        System.out.println("Estação mais importante por centralidade de grau: " + estacaoGrau);
+
     }
 }
